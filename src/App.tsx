@@ -5,6 +5,8 @@ import {ErrorsInput} from "@components/errorsInput";
 import {SeedInput} from "@components/seedInput";
 import {useSeedChange} from "@/hooks/useSeedChange";
 import {useUsers} from "@/hooks/useUsersFetch";
+import {generateErrorDataRecords} from "@/services/errors";
+import {useState} from "react";
 
 
 const columns = [
@@ -30,19 +32,24 @@ const columns = [
     }
 ];
 const App = () => {
+    const [errors, setErrors] = useState(0);
+
 
     const {seed, handleSeedChange} = useSeedChange()
     const {data, isLoading} = useUsers(seed)
     console.log(data)
-
+    const handleValueChange = (newValue:string) => {
+        setErrors(+newValue);
+    };
+    const errorDataRecords = generateErrorDataRecords(data, errors);
     return (
         <div className={'container'}>
             <RegionSelect/>
-            <ErrorsInput/>
+            <ErrorsInput onValueChange={handleValueChange}/>
             <SeedInput seed={seed} handleSeedChange={handleSeedChange}/>
             <Table
                 columns={columns}
-                dataSource={data}
+                dataSource={errorDataRecords}
                 rowKey={'id'}
                 pagination={false}
                 loading={isLoading}

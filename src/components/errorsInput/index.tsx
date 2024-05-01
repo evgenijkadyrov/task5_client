@@ -1,12 +1,16 @@
 import {ChangeEvent, useState} from 'react';
 import {Input, Space} from "antd";
 
-export const ErrorsInput = () => {
+interface ErrorProps{
+    onValueChange:(value:string)=>void
+}
+export const ErrorsInput = ({onValueChange }:ErrorProps) => {
 
     const [value, setValue] = useState('0');
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         setValue(value);
+        onValueChange(value)
     };
 
 
@@ -22,7 +26,7 @@ export const ErrorsInput = () => {
                         min={0}
                         step={0.5}
                         max={10}
-                        value={value >= 10 ? 10 : value}
+                        value={+value > 10 ? 10 : +value}
                         onChange={handleInputChange}
                     />
                 </Space.Compact>

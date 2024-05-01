@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="58cdf30b-a00d-4fbd-9abb-caf0e5e7993a" name="Changes" comment="fix: fix data">
+    <list default="true" id="58cdf30b-a00d-4fbd-9abb-caf0e5e7993a" name="Changes" comment="fix: add errors logic">
+      <change afterPath="$PROJECT_DIR$/src/services/errors.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/errorsInput/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/errorsInput/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -58,7 +60,7 @@
       <updated>1714484317624</updated>
       <workItem from="1714484318849" duration="56000" />
       <workItem from="1714484711963" duration="678000" />
-      <workItem from="1714485530026" duration="38353000" />
+      <workItem from="1714485530026" duration="45476000" />
     </task>
     <task id="LOCAL-00001" summary="feat: infinity scroll">
       <created>1714500512648</created>
@@ -88,7 +90,14 @@
       <option name="project" value="LOCAL" />
       <updated>1714567897587</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="fix: input controlled">
+      <created>1714570148938</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1714570148938</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -110,6 +119,8 @@
     <MESSAGE value="feat: finish infinity scroll, refactor code(devide on components, add custom hooks)" />
     <MESSAGE value="fix: fix error typescript" />
     <MESSAGE value="fix: fix data" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: fix data" />
+    <MESSAGE value="fix: input controlled" />
+    <MESSAGE value="fix: add errors logic" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix: add errors logic" />
   </component>
 </project>
