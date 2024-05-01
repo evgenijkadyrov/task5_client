@@ -16,29 +16,28 @@ const getRandomCharacter = (characters: string): string => {
 const applyError = (data: string, errorType: ErrorType): string => {
     const position = Math.floor(Math.random() * (data.length + 1));
     let newData = data;
-if(typeof data==='string'){
-
-
-    switch (errorType) {
-        case ErrorType.DeleteCharacter:
-            newData =
-                data.slice(0, position) + data.slice(position + 1);
-            break;
-        case ErrorType.AddCharacter:
-            const newCharacter = getRandomCharacter(alphabet);
-            newData =
-                data.slice(0, position) + newCharacter + data.slice(position);
-            break;
-        case ErrorType.SwapCharacters:
-            if (position < data.length - 1) {
+    if (typeof data === 'string') {
+        switch (errorType) {
+            case ErrorType.DeleteCharacter:
                 newData =
-                    data.slice(0, position) +
-                    data[position + 1] +
-                    data[position] +
-                    data.slice(position + 2);
-            }
-            break;
-    }}
+                    data.slice(0, position) + data.slice(position + 1);
+                break;
+            case ErrorType.AddCharacter:
+                const newCharacter = getRandomCharacter(alphabet);
+                newData =
+                    data.slice(0, position) + newCharacter + data.slice(position);
+                break;
+            case ErrorType.SwapCharacters:
+                if (position < data.length - 1) {
+                    newData =
+                        data.slice(0, position) +
+                        data[position + 1] +
+                        data[position] +
+                        data.slice(position + 2);
+                }
+                break;
+        }
+    }
 
     return newData;
 };
@@ -80,9 +79,9 @@ const generateErrorDataRecord = (
     errorRate: number
 ): DataRecord => {
     const errorCount = generateErrorCount(errorRate);
-    let modifiedData:any = {...originalData};
+    let modifiedData: any = {...originalData};
 
-    const fields = Object.keys(modifiedData);
+    const fields = [ "name", "address","phoneNumber"]
     const shuffledFields = shuffleArray(fields);
 
     for (let i = 0; i < errorCount; i++) {
@@ -90,20 +89,20 @@ const generateErrorDataRecord = (
         const errorType = Math.floor(Math.random() * 3);
         const fieldValue = modifiedData[field] as string;
 
-            switch (errorType) {
-                case ErrorType.DeleteCharacter:
-                    modifiedData[field] = applyError(fieldValue, ErrorType.DeleteCharacter);
-                    break;
-                case ErrorType.AddCharacter:
-                    modifiedData[field] = applyError(fieldValue, ErrorType.AddCharacter);
-                    break;
-                case ErrorType.SwapCharacters:
-                    if (field === 'phoneNumber') {
-                        modifiedData[field] = applyDigitsError(fieldValue);
-                    } else {
-                        modifiedData[field] = applyError(fieldValue, ErrorType.SwapCharacters);
-                    }
-                    break;
+        switch (errorType) {
+            case ErrorType.DeleteCharacter:
+                modifiedData[field] = applyError(fieldValue, ErrorType.DeleteCharacter);
+                break;
+            case ErrorType.AddCharacter:
+                modifiedData[field] = applyError(fieldValue, ErrorType.AddCharacter);
+                break;
+            case ErrorType.SwapCharacters:
+                if (field === 'phoneNumber') {
+                    modifiedData[field] = applyDigitsError(fieldValue);
+                } else {
+                    modifiedData[field] = applyError(fieldValue, ErrorType.SwapCharacters);
+                }
+                break;
 
         }
     }
@@ -125,7 +124,7 @@ const shuffleArray = <T>(array: T[]): T[] => {
 export const generateErrorDataRecords = (
     originalData: DataRecord[] | undefined,
     errorRate: number
-): DataRecord[] |undefined => {
+): DataRecord[] | undefined => {
     if (originalData)
         return originalData.map((record) =>
             generateErrorDataRecord(record, errorRate)
