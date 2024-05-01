@@ -42,7 +42,6 @@ const App = () => {
             <Table
                 columns={columns}
                 dataSource={data}
-                total={data.length}
                 rowKey={'id'}
                 pagination={false}
                 loading={isLoading}

@@ -1,6 +1,6 @@
 import {ChangeEvent, useState} from "react";
 
-interface SeedChangeProps{
+export interface SeedChangeProps{
     seed: string
     handleSeedChange:(event: ChangeEvent<HTMLInputElement>)=>void
 }

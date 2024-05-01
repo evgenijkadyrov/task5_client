@@ -1,6 +1,7 @@
-export const SeedInput = ({seed, handleSeedChange}) => {
+import {SeedChangeProps} from "@/hooks/useSeedChange";
 
 
+export const SeedInput = ({seed, handleSeedChange}:SeedChangeProps) => {
 
     return (
         <div>

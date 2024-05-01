@@ -16,7 +16,7 @@ export const useUsers = (seed: string) => {
         current: 1,
         pageSize: 10,
     });
-    const [data, setData] = useState<DataRecord[]>([]);
+    const [data, setData] = useState<DataRecord[] |undefined>([]);
 
     const fetchUsers = useCallback(async () => {
         setIsLoading(true);
@@ -25,7 +25,8 @@ export const useUsers = (seed: string) => {
                 setPagination((prev) => ({...prev, current: prev.current + 1}));
             }
             const res = await fetchFakeUsers(pagination.current, seed);
-            setData(res["data"]);
+            setData(res?.data);
+
         } catch (error) {
             console.log(error);
         } finally {
@@ -40,29 +41,32 @@ export const useUsers = (seed: string) => {
 
     useEffect(() => {
         const $tableBody = document.querySelector('.ant-table-body');
-        const onScroll = () => {
-            if (
-                Math.abs(
-                    $tableBody.scrollHeight -
-                    $tableBody.scrollTop -
-                    $tableBody.clientHeight
-                ) < 1
-            ) {
-                setPagination((prev) => ({
-                    ...prev,
-                    current: prev.current === 1 ? 3 : prev.current + 1,
-                }));
-            }
-        };
         if ($tableBody) {
-            $tableBody.addEventListener('scroll', onScroll);
-        }
+            const onScroll = () => {
 
-        return () => {
+                if (
+                    Math.abs(
+                        $tableBody.scrollHeight -
+                        $tableBody.scrollTop -
+                        $tableBody.clientHeight
+                    ) < 1
+                ) {
+                    setPagination((prev) => ({
+                        ...prev,
+                        current: prev.current === 1 ? 3 : prev.current + 1,
+                    }));
+                }
+            };
             if ($tableBody) {
-                $tableBody.removeEventListener('scroll', onScroll);
+                $tableBody.addEventListener('scroll', onScroll);
             }
-        };
+            return () => {
+                if ($tableBody) {
+                    $tableBody.removeEventListener('scroll', onScroll);
+                }
+            }
+
+        }
     }, [pagination]);
 
     useEffect(() => {
