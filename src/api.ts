@@ -1,5 +1,5 @@
 import axios from "axios";
-import {DataRecord} from "@/App";
+import {DataRecord} from "@/hooks/useUsersFetch";
 
 const instance = axios.create({
     baseURL: "https://task5-server-ruby.vercel.app",
@@ -7,13 +7,12 @@ const instance = axios.create({
 export const fetchFakeUsers = async (page: number, seed: string): Promise<DataRecord[]> => {
 
     try {
-        const users: DataRecord[] = await instance.get("/data", {
+        return await instance.get("/data", {
             params: {
                 page,
                 seed,
             }
         });
-        return users;
     } catch (error) {
         console.log(error)
     }
