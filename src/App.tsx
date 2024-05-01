@@ -33,6 +33,7 @@ const App = () => {
 
     const {seed, handleSeedChange} = useSeedChange()
     const {data, isLoading} = useUsers(seed)
+    console.log(data)
 
     return (
         <div className={'container'}>
