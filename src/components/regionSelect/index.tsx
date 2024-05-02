@@ -1,28 +1,32 @@
-import {Regions, regions, useRegionChange} from "@/hooks/useRegionChange";
-import {useEffect} from "react";
+import {Select} from "antd";
 
-export interface onChangeRegionType {
-    onChangeRegion: (region: Regions) => void
+interface RegionSelectProps {
+    region: Regions;
+    handleRegionChange: (region: Regions) => void;
 }
 
-export const RegionSelect = ({onChangeRegion}:onChangeRegionType) => {
-    const {region, handleRegionChange} = useRegionChange()
+export type Regions = "USA" | "Poland" | "Ukraine";
+export const regions: Regions[] = ["USA", "Poland", "Ukraine"];
 
-    useEffect(() => {
-        onChangeRegion(region)
-    }, [region])
+export const RegionSelect = ({
+                                 region,
+                                 handleRegionChange,
+                             }: RegionSelectProps) => {
+    const handleRegionChangeInternal = (value: Regions) => {
+        handleRegionChange(value);
+    };
 
     return (
-        <div className={'region'}>
-            <label htmlFor="region">Region:</label>
-            <select id="region" value={region} onChange={handleRegionChange}>
-                {regions.map((r) => (
-                    <option key={r} value={r}>
-                        {r}
+        <div className={"region"}>
+            <label htmlFor="region">Region: </label>
+            <Select style={{width: 120}} id="region" value={region}
+                    onChange={handleRegionChangeInternal}>
+                {regions.map((region) => (
+                    <option key={region} value={region}>
+                        {region}
                     </option>
                 ))}
-            </select>
+            </Select>
         </div>
     );
 };
-

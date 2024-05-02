@@ -5,9 +5,14 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/errorsInput/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/errorsInput/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/regionSelect/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/regionSelect/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/useRegionChange.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/useRegionChange.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/seedInput/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/seedInput/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/useRegionChange.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/useSeedChange.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/useSeedChange.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/hooks/useUsersFetch.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/useUsersFetch.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/errors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/errors.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.node.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.node.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +118,14 @@
       <option name="project" value="LOCAL" />
       <updated>1714627738615</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="feat: add region handler">
+      <created>1714632770248</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1714632770248</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

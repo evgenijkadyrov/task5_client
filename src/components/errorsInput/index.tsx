@@ -1,24 +1,24 @@
-import {ChangeEvent, useState} from 'react';
+import {ChangeEvent, memo, useCallback, useState} from 'react';
 import {Input, Space} from "antd";
 
-interface ErrorProps{
-    onValueChange:(value:string)=>void
+interface ErrorProps {
+    onValueChange: (value: string) => void
 }
-export const ErrorsInput = ({onValueChange }:ErrorProps) => {
+
+export const ErrorsInput = memo(({onValueChange}: ErrorProps) => {
 
     const [value, setValue] = useState('0');
-    const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
+
+    const handleInputChange = useCallback((event: ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         setValue(value);
         onValueChange(value)
-    };
-
+    }, [setValue, onValueChange]);
 
     return (
         <div>
-            <label htmlFor="errors">Errors:  </label>
+            <label htmlFor="errors">Errors: </label>
             <Space size={[8, 16]}>
-
                 <Space.Compact>
                     <Input
                         id="errors"
@@ -40,9 +40,8 @@ export const ErrorsInput = ({onValueChange }:ErrorProps) => {
                         onChange={handleInputChange}
                     />
                 </Space.Compact>
-
             </Space>
         </div>
     );
-};
+})
 

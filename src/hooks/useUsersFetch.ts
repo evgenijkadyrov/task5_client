@@ -7,43 +7,41 @@ export interface DataRecord {
     name: string;
     address: string;
     phoneNumber: string;
-
 }
 
-export const useUsers = (seed: string, region:string) => {
+export const useUsers = (seed: string, region: string) => {
     const [isLoading, setIsLoading] = useState(false);
     const [pagination, setPagination] = useState({
         current: 1,
-        pageSize: 10,
+        pageSize: 20,
     });
-    const [data, setData] = useState<DataRecord[] |undefined>([]);
+    const [data, setData] = useState<DataRecord[]>([]);
 
     const fetchUsers = useCallback(async () => {
         setIsLoading(true);
         try {
-            if (pagination.current === 2) {
-                setPagination((prev) => ({...prev, current: prev.current + 1}));
-            }
+
             const res = await fetchFakeUsers(pagination.current, seed, region);
-            setData([...data, ...res?.data]);
+            if (res) {
+                setData(data?.concat(res.data));
+            }
 
         } catch (error) {
             console.log(error);
         } finally {
             setIsLoading(false);
         }
-    }, [pagination.current, seed]);
+    }, [pagination, seed,region]);
 
     useEffect(() => {
-        if (pagination.current === 2) return;
         fetchUsers();
-    }, [fetchUsers, pagination]);
+    }, [pagination])
+
 
     useEffect(() => {
         const $tableBody = document.querySelector('.ant-table-body');
         if ($tableBody) {
             const onScroll = () => {
-
                 if (
                     Math.abs(
                         $tableBody.scrollHeight -
@@ -53,7 +51,7 @@ export const useUsers = (seed: string, region:string) => {
                 ) {
                     setPagination((prev) => ({
                         ...prev,
-                        current: prev.current === 1 ? 3 : prev.current + 1,
+                        current:  prev.current + 1,
                     }));
                 }
             };
@@ -65,13 +63,11 @@ export const useUsers = (seed: string, region:string) => {
                     $tableBody.removeEventListener('scroll', onScroll);
                 }
             }
-
         }
-    }, [pagination]);
-
+    }, [addEventListener]);
 
     return {
         isLoading,
-        data,
+        data, setData,setPagination
     };
 };

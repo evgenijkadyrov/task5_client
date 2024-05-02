@@ -1,21 +1,23 @@
 import './App.css';
 import {Table} from "antd";
-import {RegionSelect} from "@components/regionSelect";
+import {Regions, RegionSelect} from "@components/regionSelect";
 import {ErrorsInput} from "@components/errorsInput";
 import {SeedInput} from "@components/seedInput";
 import {useSeedChange} from "@/hooks/useSeedChange";
 import {useUsers} from "@/hooks/useUsersFetch";
 import {generateErrorDataRecords} from "@/services/errors";
-import {useState} from "react";
+import {useCallback, useState} from "react";
 
 const columns = [
     {
         title: "N",
         dataIndex: "counter",
+        width: '5%',
     },
     {
         title: "userId",
         dataIndex: "id",
+        width: '30%',
     },
     {
         title: "Name",
@@ -32,22 +34,25 @@ const columns = [
 ];
 const App = () => {
     const [errors, setErrors] = useState(0);
-    const [region, setRegion] = useState('');
-
-
-    console.log(region)
+    const [region, setRegion] = useState<Regions>('USA');
     const {seed, handleSeedChange} = useSeedChange()
-    const {data, isLoading} = useUsers(seed, region)
-    const handleValueChange = (newValue:string) => {
+    const {data, isLoading, setData, setPagination} = useUsers(seed, region)
+
+    const handleValueChange = useCallback((newValue: string) => {
         setErrors(+newValue);
-    };
-    const handleChangeRegion = (region:string) => {
+    }, [setErrors])
+    const handleChangeRegion = useCallback((region: Regions) => {
         setRegion(region);
-    };
+        setPagination({pageSize: 20, current: 1,})
+        setData([])
+    }, [setRegion,setPagination])
+
     const errorDataRecords = generateErrorDataRecords(data, errors);
+
+
     return (
         <div className={'container'}>
-            <RegionSelect onChangeRegion={handleChangeRegion}/>
+            <RegionSelect handleRegionChange={handleChangeRegion} region={region}/>
             <ErrorsInput onValueChange={handleValueChange}/>
             <SeedInput seed={seed} handleSeedChange={handleSeedChange}/>
             <Table
@@ -58,7 +63,7 @@ const App = () => {
                 loading={isLoading}
                 scroll={{
                     scrollToFirstRowOnChange: false,
-                    y: 600
+                    y: 700
                 }}
             />
         </div>

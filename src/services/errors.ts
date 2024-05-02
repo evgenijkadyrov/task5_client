@@ -38,20 +38,17 @@ const applyError = (data: string, errorType: ErrorType): string => {
                 break;
         }
     }
-
     return newData;
 };
 
 const generateErrorCount = (errorRate: number): number => {
     const integerPart = Math.floor(errorRate);
     const fractionalPart = errorRate - integerPart;
-
     let errorCount = integerPart;
 
     if (Math.random() < fractionalPart) {
         errorCount += 1;
     }
-
     return errorCount;
 };
 const applyDigitsError = (value: string): string => {
@@ -61,17 +58,14 @@ const applyDigitsError = (value: string): string => {
     if (digits && digits.length > 1) {
         const index1 = Math.floor(Math.random() * digits.length);
         let index2 = Math.floor(Math.random() * digits.length);
-
         while (index2 === index1) {
             index2 = Math.floor(Math.random() * digits.length);
         }
-
         const digit1 = digits[index1];
         const digit2 = digits[index2];
 
         return value.replace(digit1, 'x').replace(digit2, digit1).replace('x', digit2);
     }
-
     return value;
 };
 const generateErrorDataRecord = (
@@ -81,7 +75,7 @@ const generateErrorDataRecord = (
     const errorCount = generateErrorCount(errorRate);
     let modifiedData: any = {...originalData};
 
-    const fields = [ "name", "address","phoneNumber"]
+    const fields = ["name", "address", "phoneNumber"]
     const shuffledFields = shuffleArray(fields);
 
     for (let i = 0; i < errorCount; i++) {
@@ -106,7 +100,6 @@ const generateErrorDataRecord = (
 
         }
     }
-
     return modifiedData;
 };
 const getRandomField = <T>(array: T[]): T => {
