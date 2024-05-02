@@ -10,7 +10,7 @@ export interface DataRecord {
 
 }
 
-export const useUsers = (seed: string) => {
+export const useUsers = (seed: string, region:string) => {
     const [isLoading, setIsLoading] = useState(false);
     const [pagination, setPagination] = useState({
         current: 1,
@@ -24,7 +24,7 @@ export const useUsers = (seed: string) => {
             if (pagination.current === 2) {
                 setPagination((prev) => ({...prev, current: prev.current + 1}));
             }
-            const res = await fetchFakeUsers(pagination.current, seed);
+            const res = await fetchFakeUsers(pagination.current, seed, region);
             setData([...data, ...res?.data]);
 
         } catch (error) {

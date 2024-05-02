@@ -5,8 +5,9 @@ interface RegionChangeProps {
     handleRegionChange: (event: ChangeEvent<HTMLSelectElement>) => void
 }
 
-type Regions = 'USA' | 'Belarus' | 'UK'
-export const regions: Regions[] = ['USA', 'Belarus', 'UK'];
+export type Regions = 'USA' | 'Poland' | 'Ukraine'
+export const regions: Regions[] = ['USA', 'Poland', 'Ukraine'];
+
 export const useRegionChange = (): RegionChangeProps => {
 
     const [region, setRegion] = useState(regions[0]);
