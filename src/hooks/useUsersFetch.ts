@@ -25,7 +25,7 @@ export const useUsers = (seed: string) => {
                 setPagination((prev) => ({...prev, current: prev.current + 1}));
             }
             const res = await fetchFakeUsers(pagination.current, seed);
-            setData(res?.data);
+            setData([...data, ...res?.data]);
 
         } catch (error) {
             console.log(error);
@@ -69,12 +69,6 @@ export const useUsers = (seed: string) => {
         }
     }, [pagination]);
 
-    useEffect(() => {
-        const $tableBody = document.querySelector('.ant-table-body');
-        if ($tableBody) {
-            $tableBody.scrollTop = 0;
-        }
-    }, [pagination]);
 
     return {
         isLoading,
