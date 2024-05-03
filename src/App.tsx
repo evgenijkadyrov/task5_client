@@ -3,10 +3,9 @@ import {Table} from "antd";
 import {Regions, RegionSelect} from "@components/regionSelect";
 import {ErrorsInput} from "@components/errorsInput";
 import {SeedInput} from "@components/seedInput";
-import {useSeedChange} from "@/hooks/useSeedChange";
 import {useUsers} from "@/hooks/useUsersFetch";
-import {generateErrorDataRecords} from "@/services/errors";
-import {useCallback, useState} from "react";
+import {useCallback, useEffect, useState} from "react";
+import {debounce} from "ahooks/es/utils/lodash-polyfill";
 
 const columns = [
     {
@@ -35,29 +34,73 @@ const columns = [
 const App = () => {
     const [errors, setErrors] = useState(0);
     const [region, setRegion] = useState<Regions>('USA');
-    const {seed, handleSeedChange} = useSeedChange()
-    const {data, isLoading, setData, setPagination} = useUsers(seed, region)
+    const [seed, setSeed] = useState('0');
+
+
+    const debouncedSetErrorsValue = debounce(setErrors, 800);
+    const debouncedSetSeedValue = debounce(setSeed, 800);
+    const [pagination, setPagination] = useState({
+        current: 1,
+        pageSize: 20,
+    });
+    const {data, isLoading, setData,} = useUsers(seed, region, errors, pagination)
 
     const handleValueChange = useCallback((newValue: string) => {
-        setErrors(+newValue);
+        debouncedSetErrorsValue(+newValue);
     }, [setErrors])
+
     const handleChangeRegion = useCallback((region: Regions) => {
         setRegion(region);
-        setPagination({pageSize: 20, current: 1,})
+
+    }, [setRegion, setPagination])
+
+    const handleSeedChange = useCallback((seed: string) => {
+
+        debouncedSetSeedValue(+seed);
+    }, [debouncedSetSeedValue]);
+
+    useEffect(() => {
+        setPagination({pageSize: 20, current: 1})
         setData([])
-    }, [setRegion,setPagination])
+    }, [region, errors])
 
-    const errorDataRecords = generateErrorDataRecords(data, errors);
 
+    useEffect(() => {
+        const $tableBody = document.querySelector('.ant-table-body');
+        if ($tableBody) {
+            const onScroll = () => {
+                if (
+                    Math.abs(
+                        $tableBody.scrollHeight -
+                        $tableBody.scrollTop -
+                        $tableBody.clientHeight
+                    ) < 1
+                ) {
+                    setPagination((prev) => ({
+                        ...prev,
+                        current: prev.current + 1,
+                    }));
+                }
+            };
+            if ($tableBody) {
+                $tableBody.addEventListener('scroll', onScroll);
+            }
+            return () => {
+                if ($tableBody) {
+                    $tableBody.removeEventListener('scroll', onScroll);
+                }
+            }
+        }
+    }, [addEventListener]);
 
     return (
         <div className={'container'}>
             <RegionSelect handleRegionChange={handleChangeRegion} region={region}/>
             <ErrorsInput onValueChange={handleValueChange}/>
-            <SeedInput seed={seed} handleSeedChange={handleSeedChange}/>
+            <SeedInput onValueChange={handleSeedChange}/>
             <Table
                 columns={columns}
-                dataSource={errorDataRecords}
+                dataSource={data}
                 rowKey={'id'}
                 pagination={false}
                 loading={isLoading}

@@ -1,4 +1,4 @@
-import {DataRecord} from "@/hooks/useUsersFetch";
+import { DataRecord } from "@/hooks/useUsersFetch";
 
 enum ErrorType {
     DeleteCharacter,
@@ -19,13 +19,11 @@ const applyError = (data: string, errorType: ErrorType): string => {
     if (typeof data === 'string') {
         switch (errorType) {
             case ErrorType.DeleteCharacter:
-                newData =
-                    data.slice(0, position) + data.slice(position + 1);
+                newData = data.slice(0, position) + data.slice(position + 1);
                 break;
             case ErrorType.AddCharacter:
                 const newCharacter = getRandomCharacter(alphabet);
-                newData =
-                    data.slice(0, position) + newCharacter + data.slice(position);
+                newData = data.slice(0, position) + newCharacter + data.slice(position);
                 break;
             case ErrorType.SwapCharacters:
                 if (position < data.length - 1) {
@@ -41,16 +39,6 @@ const applyError = (data: string, errorType: ErrorType): string => {
     return newData;
 };
 
-const generateErrorCount = (errorRate: number): number => {
-    const integerPart = Math.floor(errorRate);
-    const fractionalPart = errorRate - integerPart;
-    let errorCount = integerPart;
-
-    if (Math.random() < fractionalPart) {
-        errorCount += 1;
-    }
-    return errorCount;
-};
 const applyDigitsError = (value: string): string => {
     const digitsRegex = /\d/g;
     const digits = value.match(digitsRegex);
@@ -68,14 +56,35 @@ const applyDigitsError = (value: string): string => {
     }
     return value;
 };
+
+const applyPhoneNumberError = (value: string, errorType: ErrorType): string => {
+    if (errorType === ErrorType.AddCharacter || errorType === ErrorType.DeleteCharacter) {
+        return applyError(value, errorType);
+    } else if (errorType === ErrorType.SwapCharacters) {
+        return applyDigitsError(value);
+    }
+    return value;
+};
+
+const generateErrorCount = (errorRate: number): number => {
+    const integerPart = Math.floor(errorRate);
+    const fractionalPart = errorRate - integerPart;
+    let errorCount = integerPart;
+
+    if (Math.random() < fractionalPart) {
+        errorCount += 1;
+    }
+    return errorCount;
+};
+
 const generateErrorDataRecord = (
     originalData: DataRecord,
     errorRate: number
 ): DataRecord => {
     const errorCount = generateErrorCount(errorRate);
-    let modifiedData: any = {...originalData};
+    let modifiedData: any = { ...originalData };
 
-    const fields = ["name", "address", "phoneNumber"]
+    const fields = ["name", "address", "phoneNumber"];
     const shuffledFields = shuffleArray(fields);
 
     for (let i = 0; i < errorCount; i++) {
@@ -83,29 +92,20 @@ const generateErrorDataRecord = (
         const errorType = Math.floor(Math.random() * 3);
         const fieldValue = modifiedData[field] as string;
 
-        switch (errorType) {
-            case ErrorType.DeleteCharacter:
-                modifiedData[field] = applyError(fieldValue, ErrorType.DeleteCharacter);
-                break;
-            case ErrorType.AddCharacter:
-                modifiedData[field] = applyError(fieldValue, ErrorType.AddCharacter);
-                break;
-            case ErrorType.SwapCharacters:
-                if (field === 'phoneNumber') {
-                    modifiedData[field] = applyDigitsError(fieldValue);
-                } else {
-                    modifiedData[field] = applyError(fieldValue, ErrorType.SwapCharacters);
-                }
-                break;
-
+        if (field === 'phoneNumber') {
+            modifiedData[field] = applyPhoneNumberError(fieldValue, errorType);
+        } else {
+            modifiedData[field] = applyError(fieldValue, errorType);
         }
     }
     return modifiedData;
 };
+
 const getRandomField = <T>(array: T[]): T => {
     const randomIndex = Math.floor(Math.random() * array.length);
     return array[randomIndex];
 };
+
 const shuffleArray = <T>(array: T[]): T[] => {
     const newArray = [...array];
     for (let i = newArray.length - 1; i > 0; i--) {
@@ -114,12 +114,15 @@ const shuffleArray = <T>(array: T[]): T[] => {
     }
     return newArray;
 };
+
 export const generateErrorDataRecords = (
     originalData: DataRecord[] | undefined,
     errorRate: number
 ): DataRecord[] | undefined => {
-    if (originalData)
+    if (originalData) {
         return originalData.map((record) =>
             generateErrorDataRecord(record, errorRate)
         );
+    }
+    return undefined;
 };

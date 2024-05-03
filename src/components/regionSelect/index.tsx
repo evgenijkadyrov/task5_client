@@ -1,4 +1,5 @@
 import {Select} from "antd";
+import {memo} from "react";
 
 interface RegionSelectProps {
     region: Regions;
@@ -8,7 +9,7 @@ interface RegionSelectProps {
 export type Regions = "USA" | "Poland" | "Ukraine";
 export const regions: Regions[] = ["USA", "Poland", "Ukraine"];
 
-export const RegionSelect = ({
+export const RegionSelect = memo(({
                                  region,
                                  handleRegionChange,
                              }: RegionSelectProps) => {
@@ -22,11 +23,11 @@ export const RegionSelect = ({
             <Select style={{width: 120}} id="region" value={region}
                     onChange={handleRegionChangeInternal}>
                 {regions.map((region) => (
-                    <option key={region} value={region}>
+                    <Select.Option key={region} value={region}>
                         {region}
-                    </option>
+                    </Select.Option>
                 ))}
             </Select>
         </div>
     );
-};
+});

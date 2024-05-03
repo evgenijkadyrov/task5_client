@@ -1,4 +1,4 @@
-import {useCallback, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import {fetchFakeUsers} from "@/api";
 
 export interface DataRecord {
@@ -9,65 +9,40 @@ export interface DataRecord {
     phoneNumber: string;
 }
 
-export const useUsers = (seed: string, region: string) => {
+export const useUsers = (seed: string, region: string, errors: number, pagination: any) => {
     const [isLoading, setIsLoading] = useState(false);
-    const [pagination, setPagination] = useState({
-        current: 1,
-        pageSize: 20,
-    });
+
     const [data, setData] = useState<DataRecord[]>([]);
 
-    const fetchUsers = useCallback(async () => {
+    const fetchUsers = async (page:number) => {
         setIsLoading(true);
         try {
-
-            const res = await fetchFakeUsers(pagination.current, seed, region);
+            const res = await fetchFakeUsers(page, seed, region, errors);
             if (res) {
-                setData(data?.concat(res.data));
+                setData((prevData) => {
+                    if (page === 1) {
+                        return res.data;
+                    } else {
+                        return [...prevData, ...res.data];
+                    }
+                });
             }
-
         } catch (error) {
             console.log(error);
         } finally {
             setIsLoading(false);
         }
-    }, [pagination, seed,region]);
+    }
+    useEffect(() => {
+        fetchUsers(1); // Fetch the first page when the region changes
+    }, [region])
 
     useEffect(() => {
-        fetchUsers();
-    }, [pagination])
-
-
-    useEffect(() => {
-        const $tableBody = document.querySelector('.ant-table-body');
-        if ($tableBody) {
-            const onScroll = () => {
-                if (
-                    Math.abs(
-                        $tableBody.scrollHeight -
-                        $tableBody.scrollTop -
-                        $tableBody.clientHeight
-                    ) < 1
-                ) {
-                    setPagination((prev) => ({
-                        ...prev,
-                        current:  prev.current + 1,
-                    }));
-                }
-            };
-            if ($tableBody) {
-                $tableBody.addEventListener('scroll', onScroll);
-            }
-            return () => {
-                if ($tableBody) {
-                    $tableBody.removeEventListener('scroll', onScroll);
-                }
-            }
-        }
-    }, [addEventListener]);
+        fetchUsers(pagination.current);
+    }, [pagination, errors, seed])
 
     return {
         isLoading,
-        data, setData,setPagination
+        data, setData
     };
 };
