@@ -10,7 +10,7 @@ export const fetchFakeUsers = async (page: number, seed: string, region:string, 
         return await instance.get("/data", {
             params: {
                 page,
-                seed,
+                seedValue:seed,
                 region,
                 errorRate
             }
