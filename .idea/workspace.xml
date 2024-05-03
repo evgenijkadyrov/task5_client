@@ -1,16 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="58cdf30b-a00d-4fbd-9abb-caf0e5e7993a" name="Changes" comment="fix: some ui">
+    <list default="true" id="58cdf30b-a00d-4fbd-9abb-caf0e5e7993a" name="Changes" comment="feat: add debounce, fix some errors">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/api.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/regionSelect/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/regionSelect/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/seedInput/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/seedInput/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/hooks/useUsersFetch.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/useUsersFetch.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/errors.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/errors.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +122,14 @@
       <option name="project" value="LOCAL" />
       <updated>1714648685528</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="feat: add debounce, fix some errors">
+      <created>1714718630493</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1714718630493</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -158,6 +157,7 @@
     <MESSAGE value="fix: change data, save previous result" />
     <MESSAGE value="feat: add region handler" />
     <MESSAGE value="fix: some ui" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix: some ui" />
+    <MESSAGE value="feat: add debounce, fix some errors" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add debounce, fix some errors" />
   </component>
 </project>
