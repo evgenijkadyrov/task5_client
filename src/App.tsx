@@ -6,6 +6,8 @@ import {SeedInput} from "@components/seedInput";
 import {useUsers} from "@/hooks/useUsersFetch";
 import {useCallback, useEffect, useState} from "react";
 import {debounce} from "ahooks/es/utils/lodash-polyfill";
+import {CalendarTodo, RangeCalendar, DatePicker} from 'datepicker_front'
+import {Picker} from "@/Picker";
 
 const columns = [
     {
@@ -94,21 +96,23 @@ const App = () => {
     }, [addEventListener]);
 
     return (
-        <div className={'container'}>
-            <RegionSelect handleRegionChange={handleChangeRegion} region={region}/>
-            <ErrorsInput onValueChange={handleValueChange}/>
-            <SeedInput onValueChange={handleSeedChange}/>
-            <Table
-                columns={columns}
-                dataSource={data}
-                rowKey={'id'}
-                pagination={false}
-                loading={isLoading}
-                scroll={{
-                    scrollToFirstRowOnChange: false,
-                    y: 700
-                }}
-            />
+        <div >
+            <Picker/>
+            {/*<RegionSelect handleRegionChange={handleChangeRegion} region={region}/>*/}
+            {/*<ErrorsInput onValueChange={handleValueChange}/>*/}
+            {/*<SeedInput onValueChange={handleSeedChange}/>*/}
+            {/*<CalendarTodo/>*/}
+            {/*<Table*/}
+            {/*    columns={columns}*/}
+            {/*    dataSource={data}*/}
+            {/*    rowKey={'id'}*/}
+            {/*    pagination={false}*/}
+            {/*    loading={isLoading}*/}
+            {/*    scroll={{*/}
+            {/*        scrollToFirstRowOnChange: false,*/}
+            {/*        y: 700*/}
+            {/*    }}*/}
+            {/*/>*/}
         </div>
     );
 };

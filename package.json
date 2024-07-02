@@ -12,7 +12,8 @@
   "dependencies": {
     "antd": "^5.16.5",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "sass-loader": "^14.2.1"
   },
   "devDependencies": {
     "@types/node": "^20.12.7",
@@ -24,6 +25,7 @@
     "ahooks": "^3.7.11",
     "antd-table-infinity": "^1.1.6",
     "axios": "^1.6.8",
+    "datepicker_front": "^1.0.14",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.6",
