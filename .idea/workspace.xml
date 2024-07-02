@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="58cdf30b-a00d-4fbd-9abb-caf0e5e7993a" name="Changes" comment="feat: add picker">
-      <change beforePath="$PROJECT_DIR$/src/Picker.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Picker.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +61,7 @@
       <workItem from="1714485530026" duration="45476000" />
       <workItem from="1714732449006" duration="3136000" />
       <workItem from="1719837834751" duration="1599000" />
-      <workItem from="1719954661312" duration="2470000" />
+      <workItem from="1719954661312" duration="2742000" />
     </task>
     <task id="LOCAL-00001" summary="feat: infinity scroll">
       <created>1714500512648</created>
@@ -146,7 +147,14 @@
       <option name="project" value="LOCAL" />
       <updated>1719957130357</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="feat: add picker">
+      <created>1719957312769</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1719957312769</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
