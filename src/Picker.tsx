@@ -6,6 +6,7 @@ export const Picker = () => {
             <CalendarTodo color={'default'}/>
             <RangeCalendar startDayOfWeek={'Sunday'}/>
             <DatePicker color={'primary'} showHolidays={false} />
+
         </div>
     );
 };
